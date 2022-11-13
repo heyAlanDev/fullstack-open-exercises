@@ -6,6 +6,12 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const all = good + neutral + bad
+  const average =  (good - bad) / all
+  const positiveRate = (good * 100) / all
+
+  
+
   return (
     <>
       <div>
@@ -28,6 +34,18 @@ const App = () => {
         <p>
           <span style={{ fontWeight: 'bold' }}>Bad </span>
           {bad}
+        </p>
+        <p>
+          <span style={{ fontWeight: 'bold' }}>All </span>
+          {all}
+        </p>
+        <p>
+          <span style={{ fontWeight: 'bold' }}>Average </span>
+          {average ? average : 0}
+        </p>
+        <p>
+          <span style={{ fontWeight: 'bold' }}>Positive </span>
+          {positiveRate ? positiveRate : 0}%
         </p>
       </div>
     </>
