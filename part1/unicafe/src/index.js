@@ -3,14 +3,31 @@ import ReactDOM from 'react-dom/client'
 
 const Statistic = ({ text, value }) => {
   return (
-    <p>
-      <span style={{ fontWeight: 'bold' }}>{text} </span> {value ? value : 0}
-    </p>
+    <tbody>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    </tbody>
   )
 }
 
 const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>
+}
+
+const Table = ({title,subtitle, children }) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th style={{ fontWeight: 'bold' }}>{title}</th>
+          <th style={{ fontWeight: 'bold' }}>{subtitle}</th>
+        </tr>
+      </thead>
+      {children}
+    </table>
+  )
 }
 
 const Statistics = ({ good, neutral, bad }) => {
@@ -23,13 +40,15 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <h1>Statistics</h1>
-      <Statistic text='Good' value={good} />
-      <Statistic text='Neutral' value={neutral} />
-      <Statistic text='Bad' value={bad} />
-      <Statistic text='All' value={all} />
-      <Statistic text='All' value={all} />
-      <Statistic text='Average' value={`${average}%`} />
-      <Statistic text='Positive' value={`${positiveRate}%`} />
+      <Table title='Feedback' subtitle='Value' >
+        <Statistic text='Good' value={good} />
+        <Statistic text='Neutral' value={neutral} />
+        <Statistic text='Bad' value={bad} />
+        <Statistic text='All' value={all} />
+        <Statistic text='All' value={all} />
+        <Statistic text='Average' value={`${average}%`} />
+        <Statistic text='Positive' value={`${positiveRate}%`} />
+      </Table>
     </div>
   )
 }
