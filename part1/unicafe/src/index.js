@@ -1,6 +1,18 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
+const Statistic = ({ text, value }) => {
+  return (
+    <p>
+      <span style={{ fontWeight: 'bold' }}>{text} </span> {value ? value : 0}
+    </p>
+  )
+}
+
+const Button = ({ handleClick, text }) => {
+  return <button onClick={handleClick}>{text}</button>
+}
+
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad
   const average = (good - bad) / all
@@ -11,29 +23,13 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <h1>Statistics</h1>
-
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Good </span> {good}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Neutral </span> {neutral}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Bad </span>
-        {bad}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>All </span>
-        {all}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Average </span>
-        {average ? average : 0}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Positive </span>
-        {positiveRate ? positiveRate : 0}%
-      </p>
+      <Statistic text='Good' value={good} />
+      <Statistic text='Neutral' value={neutral} />
+      <Statistic text='Bad' value={bad} />
+      <Statistic text='All' value={all} />
+      <Statistic text='All' value={all} />
+      <Statistic text='Average' value={`${average}%`} />
+      <Statistic text='Positive' value={`${positiveRate}%`} />
     </div>
   )
 }
@@ -47,9 +43,9 @@ const App = () => {
     <>
       <div>
         <h1>Give feedback</h1>
-        <button onClick={() => setGood(good + 1)}>Good</button>
-        <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
-        <button onClick={() => setBad(bad + 1)}>Bad</button>
+        <Button handleClick={() => setGood(good + 1)} text='Good' />
+        <Button handleClick={() => setNeutral(neutral + 1)} text='Neutral' />
+        <Button handleClick={() => setBad(bad + 1)} text='Bad' />
       </div>
       <Statistics good={good} neutral={neutral} bad={bad} />
     </>
