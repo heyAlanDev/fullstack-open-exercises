@@ -19,7 +19,7 @@ const App = ({ anecdotes }) => {
   return (
     <div>
       <h2>{anecdotes[selected].anecdote}</h2>
-      <p>{votes}</p>
+      <p>has {votes} votes</p>
       <button
         onClick={() => {
           dataVotes.push('vote')
