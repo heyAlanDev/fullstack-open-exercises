@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "part1/*"
+    "part1/*",
+    "part2/*"
   ],
   "scripts": {
     "co": "sui-mono commit",
