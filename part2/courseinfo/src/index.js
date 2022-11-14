@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom/client'
 
 const Header = ({ course }) => <h1>{course}</h1>
 
-const Content = ({ parts }) => {
-  return (
-    <div>
-      {parts.map(({ name, exercises }, index) => (
-        <p key={index}>
-          {name} {exercises}
-        </p>
-      ))}
-    </div>
-  )
-}
+const Content = ({ parts }) => (
+  <div>
+    {parts.map(({ name, exercises }, index) => (
+      <p key={index}>
+        {name} {exercises}
+      </p>
+    ))}
+  </div>
+)
 
 const Total = ({ parts = [] }) => {
   const totalExercises = parts
