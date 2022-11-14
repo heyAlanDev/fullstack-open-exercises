@@ -22,10 +22,14 @@ const Total = ({ parts = [] }) => {
       return prev + current
     })
 
-  return <p>Total number exercises {totalExercises}</p>
+  return (
+    <p>
+      <strong>Total of {totalExercises} exercises</strong>
+    </p>
+  )
 }
 
-const Course = ({course}) => {
+const Course = ({ course }) => {
   return (
     <div>
       <Header course={course.name} />
@@ -37,19 +41,23 @@ const Course = ({course}) => {
 
 const App = () => {
   const course = {
+    id: 1,
     name: 'Half Stack application development',
     parts: [
       {
         name: 'Fundamentals of React',
-        exercises: 10
+        exercises: 10,
+        id: 1
       },
       {
         name: 'Using props to pass data',
-        exercises: 7
+        exercises: 7,
+        id: 2
       },
       {
         name: 'State of a component',
-        exercises: 14
+        exercises: 14,
+        id: 3
       }
     ]
   }
