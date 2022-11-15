@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
-const App = () => <h1>Hello World</h1>
-
+import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(<App />)
+const persons = [{ name: 'Arto Hellas' }]
+
+root.render(<App dataPersons={persons}/>)
+
