@@ -37,12 +37,18 @@ const App = ({ dataPersons }) => {
       name: newName
     }
 
+    if (
+      persons
+        .map(person => JSON.stringify(person))
+        .includes(JSON.stringify(PersonObject))
+    )
+      return alert(`${PersonObject.name} is already added to phonebook`)
+
     setPersons(persons.concat(PersonObject))
     setNewName('')
   }
 
   const handlePersonChange = event => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
