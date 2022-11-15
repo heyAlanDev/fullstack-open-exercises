@@ -1,7 +1,7 @@
-const Country = ({ name, capital, population, languages, flag }) => {
+const Country = ({ name, capital, population, languages, flag,handleClose }) => {
   return (
     <div>
-      <h2>{name}</h2>
+      <h2>{name} <button onClick={handleClose}>close</button></h2> 
       <p>capital {capital}</p>
       <p>population {population}</p>
       <h3>Languages</h3>
