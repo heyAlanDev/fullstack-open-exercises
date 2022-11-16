@@ -65,7 +65,7 @@ const App = () => {
         .remove(id)
         .then(() => alert(`${name} has been deleted successful`))
         .catch(err => console.log(err))
-        setPersons(persons.filter(p => p.id !== id))
+      setPersons(persons.filter(p => p.id !== id))
     }
   }
 
@@ -85,7 +85,7 @@ const App = () => {
         number={newNumber}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} handleDelete={handleDeletePerson}/>
+      <Persons persons={persons} handleDelete={handleDeletePerson} />
     </div>
   )
 }
