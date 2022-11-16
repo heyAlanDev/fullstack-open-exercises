@@ -92,8 +92,15 @@ const App = () => {
     if (window.confirm(`Delete ${name}?`)) {
       personService
         .remove(id)
-        .then(() => alert(`${name} has been deleted successful`))
-        .catch(err => console.log(err))
+        .then(() => {
+          setMessage({
+            message: `${name} has been deleted successful`,
+            type: 'good'
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+        })
       setPersons(persons.filter(p => p.id !== id))
     }
   }
@@ -102,7 +109,12 @@ const App = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1>Phonebook</h1>
-        <Filter handleChange={handleSearch} persons={persons} search={search} />
+        <Filter
+          handleChange={handleSearch}
+          persons={persons}
+          search={search}
+          handleDelete={handleDeletePerson}
+        />
       </div>
       <Notification message={message} />
 

@@ -1,6 +1,6 @@
-import FilterResponse from "./FilterResponse"
+import FilterResponse from './FilterResponse'
 
-const Filter = ({ persons, handleChange, search }) => (
+const Filter = ({ persons, handleChange, search, handleDelete }) => (
   <div
     style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
   >
@@ -9,7 +9,11 @@ const Filter = ({ persons, handleChange, search }) => (
       placeholder='Make your search'
       value={search}
     />
-    <FilterResponse persons={persons} search={search} />
+    <FilterResponse
+      persons={persons}
+      search={search}
+      handleDelete={handleDelete}
+    />
   </div>
 )
 
