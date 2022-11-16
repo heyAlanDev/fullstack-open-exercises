@@ -53,6 +53,16 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+        .catch(error => {
+          setMessage({
+            message: `Information of '${personToUpdate.name}' was already removed from server`,
+            type: 'error'
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          setPersons(persons.filter(person => person.id !== personToUpdate.id))
+        })
     }
 
     personService.create(personObject).then(returnedPerson => {
