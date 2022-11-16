@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
+import { Notification } from './components/Notification'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then(initialPersons => {
@@ -29,19 +31,36 @@ const App = () => {
         `${personObject.name} is already added to phonebook, replace the old number with a new number`
       )
     ) {
-      const id = persons.find(person => person.name === personObject.name).id
+      const personToUpdate = persons.find(
+        person => person.name === personObject.name
+      )
 
-      return personService.update(id, personObject).then(returnedPerson => {
-        setPersons(
-          persons.map(person => (person.id !== id ? person : returnedPerson))
-        )
-        setNewName('')
-        setNewNumber('')
-      })
+      return personService
+        .update(personToUpdate.id, personObject)
+        .then(returnedPerson => {
+          setPersons(
+            persons.map(person =>
+              person.id !== personToUpdate.id ? person : returnedPerson
+            )
+          )
+          setMessage({
+            message: `Updated '${returnedPerson.name}'`,
+            type: 'good'
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          setNewName('')
+          setNewNumber('')
+        })
     }
 
     personService.create(personObject).then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
+      setMessage({ message: `Added '${returnedPerson.name}'`, type: 'good' })
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
       setNewName('')
       setNewNumber('')
     })
@@ -72,9 +91,10 @@ const App = () => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h2>Phonebook</h2>
+        <h1>Phonebook</h1>
         <Filter handleChange={handleSearch} persons={persons} search={search} />
       </div>
+      <Notification message={message} />
 
       <h2>Add new person</h2>
       <PersonForm
