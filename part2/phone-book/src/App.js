@@ -23,11 +23,25 @@ const App = () => {
       number: newNumber
     }
 
-    if (persons.find(person => person.name === personObject.name))
-      return alert(`${personObject.name} is already added to Numberbook`)
+    if (
+      persons.find(person => person.name === personObject.name) &&
+      window.confirm(
+        `${personObject.name} is already added to phonebook, replace the old number with a new number`
+      )
+    ) {
+      const id = persons.find(person => person.name === personObject.name).id
 
-    personService.create(personObject).then(returnedPersons => {
-      setPersons(persons.concat(returnedPersons))
+      return personService.update(id, personObject).then(returnedPerson => {
+        setPersons(
+          persons.map(person => (person.id !== id ? person : returnedPerson))
+        )
+        setNewName('')
+        setNewNumber('')
+      })
+    }
+
+    personService.create(personObject).then(returnedPerson => {
+      setPersons(persons.concat(returnedPerson))
       setNewName('')
       setNewNumber('')
     })
@@ -45,6 +59,16 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const handleDeletePerson = (id, name) => {
+    if (window.confirm(`Delete ${name}?`)) {
+      personService
+        .remove(id)
+        .then(() => alert(`${name} has been deleted successful`))
+        .catch(err => console.log(err))
+        setPersons(persons.filter(p => p.id !== id))
+    }
+  }
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -58,10 +82,10 @@ const App = () => {
         handleNameChange={handleNamePersonChange}
         handleNumberChange={handleNumberPersonChange}
         name={newName}
-        Number={newNumber}
+        number={newNumber}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} />
+      <Persons persons={persons} handleDelete={handleDeletePerson}/>
     </div>
   )
 }
