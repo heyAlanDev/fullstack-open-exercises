@@ -3,12 +3,12 @@ import personService from '../services/persons'
 
 const Persons = ({ persons }) => {
   const handleClick = (id, name) => {
-    window.confirm(`Delete ${name}?`)
-      ? personService
-          .remove(id)
-          .then(() => alert(`${name} has been deleted successful`))
-          .catch(err => console.log(err))
-      : alert(`Delete has been cancel`)
+    if (window.confirm(`Delete ${name}?`)) {
+      personService
+        .remove(id)
+        .then(() => alert(`${name} has been deleted successful`))
+        .catch(err => console.log(err))
+    }
   }
 
   return (
