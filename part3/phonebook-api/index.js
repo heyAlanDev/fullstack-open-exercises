@@ -1,9 +1,11 @@
-var express = require('express')
-var morgan = require('morgan')
+let express = require('express')
+let cors = require('cors')
+let morgan = require('morgan')
 
-var app = express()
+let app = express()
 
 app.use(express.json())
+app.use(cors())
 
 morgan.token('body', req => {
   return JSON.stringify(req.body)
