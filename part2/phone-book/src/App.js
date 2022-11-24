@@ -65,15 +65,26 @@ const App = () => {
         })
     }
 
-    personService.create(personObject).then(returnedPerson => {
-      setPersons(persons.concat(returnedPerson))
-      setMessage({ message: `Added '${returnedPerson.name}'`, type: 'good' })
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
-      setNewName('')
-      setNewNumber('')
-    })
+    personService
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setMessage({ message: `Added '${returnedPerson.name}'`, type: 'good' })
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch(err => {
+        setMessage({
+          message: err.response.data.error,
+          type: 'error'
+        })
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+      })
   }
 
   const handleNamePersonChange = event => {
@@ -90,17 +101,15 @@ const App = () => {
 
   const handleDeletePerson = (id, name) => {
     if (window.confirm(`Delete ${name}?`)) {
-      personService
-        .remove(id)
-        .then(() => {
-          setMessage({
-            message: `${name} has been deleted successful`,
-            type: 'good'
-          })
-          setTimeout(() => {
-            setMessage(null)
-          }, 5000)
+      personService.remove(id).then(() => {
+        setMessage({
+          message: `${name} has been deleted successful`,
+          type: 'good'
         })
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+      })
       setPersons(persons.filter(p => p.id !== id))
     }
   }

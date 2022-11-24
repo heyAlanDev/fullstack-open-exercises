@@ -24,13 +24,6 @@ app.use(
   )
 )
 
-const persons = [
-  { id: 1, name: 'Arto Hellas ', number: '040-123456' },
-  { id: 2, name: 'Ada Lovelace', number: '39-44-5323523' },
-  { id: 3, name: 'Dan Abramov', number: '12-43-234345' },
-  { id: 4, name: 'Mary Poppendick', number: '39-23-6423 122' }
-]
-
 app.get('/', (_req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
@@ -66,19 +59,13 @@ app.delete('/api/persons/:id', async (req, res, next) => {
     const response = await Person.findByIdAndDelete(id)
     if (response === null) return res.sendStatus(404)
     res.sendStatus(204)
-  } catch {
-    err => next(err)
+  } catch (err) {
+    next(err)
   }
 })
 
 app.post('/api/persons', async (req, res) => {
   const body = req.body
-
-  // if (!body.name || !body.number) {
-  //   return res.status(400).json({
-  //     error: 'Name o Phone missing'
-  //   })
-  // }
 
   const newPerson = new Person({
     name: body.name,
