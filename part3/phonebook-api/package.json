@@ -11,10 +11,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "morgan": "^1.10.0"
-  },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0"
   }
 }
