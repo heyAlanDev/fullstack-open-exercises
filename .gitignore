@@ -31,3 +31,4 @@ part2/src/config.json
 
 .env
 /.env
+*/.env
