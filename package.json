@@ -6,7 +6,8 @@
   "workspaces": [
     "part1/*",
     "part2/*",
-    "part3/*"
+    "part3/*",
+    "part4/*"
   ],
   "scripts": {
     "co": "sui-mono commit",
