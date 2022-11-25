@@ -34,3 +34,5 @@ part2/src/config.json
 */.env
 part4/blog-list/.env
 part3/phonebook-api/.env
+./part4/blog-list/.env
+./part3/phonebook-api/.env
