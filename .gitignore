@@ -28,3 +28,5 @@ yarn-error.log*
 
 # variable env dont work for me
 part2/src/config.json
+
+.env

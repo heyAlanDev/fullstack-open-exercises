@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const mongoUrl = process.env.MONGODB_URI
+const { MONGODB_URI, MONGODB_URI_TEST, NODE_ENV } = process.env
+
+const mongoUrl = NODE_ENV === 'test' ? MONGODB_URI_TEST : MONGODB_URI
 
 mongoose
   .connect(mongoUrl, {
@@ -10,7 +12,7 @@ mongoose
   .then(() => {
     console.log('Database connected')
   })
-  .catch((err) => {
+  .catch(err => {
     console.error('error connecting to MongoDB:', err.message)
   })
 

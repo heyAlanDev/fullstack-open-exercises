@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@s-ui/mono": "2.34.0",
+    "jest": "^27.5.1",
     "json-server": "0.17.1",
     "nodemon": "2.0.20",
     "standard": "^17.0.0"
